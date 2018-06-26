@@ -9,6 +9,14 @@ Module.register("worldclock", {
 	defaults: {
 		timeFormat: "LT", //defined in moment.js format()
 		style: "left", //where the time could be located; 'top', 'left','right','bottom'
+		timeElement: "div",
+		timeClass: "time",
+		captionElement: "div",
+		captionClass: "caption",
+		zoneElement: "div",
+		zoneClass: "zone",
+		gapElement: "div",
+		gapClass: "gap",
 		clocks: [
 			{
 				title: "Seoul",
@@ -84,17 +92,17 @@ Module.register("worldclock", {
 		var timeString;
 		timeString = clock.format(this.config.timeFormat);
 
-		var timeWrapper = document.createElement("div");
+		var timeWrapper = document.createElement(this.config.timeElement);
 		timeWrapper.innerHTML = timeString;
-		timeWrapper.className = "time";
+		timeWrapper.className = this.config.timeClass;
 		//timeWrapper.className = "time bright medium"
 
-		var captionWrapper = document.createElement("div");
-		captionWrapper.className = "caption";
+		var captionWrapper = document.createElement(this.config.captionElement);
+		captionWrapper.className = this.config.captionClass;
 		//captionWrapper.className = 'caption small normal'
 
-		var zoneWrapper = document.createElement("div");
-		zoneWrapper.className = "zone";
+		var zoneWrapper = document.createElement(this.config.zoneElement);
+		zoneWrapper.className = this.config.zoneClass;
 
 		if (c.title != null) {
 			zoneWrapper.innerHTML = c.title
@@ -104,8 +112,8 @@ Module.register("worldclock", {
 
 		captionWrapper.appendChild(zoneWrapper);
 
-		var gapWrapper = document.createElement("div");
-		gapWrapper.className = "gap";
+		var gapWrapper = document.createElement(this.config.gapElement);
+		gapWrapper.className = this.config.gapClass;
 		gapWrapper.innerHTML = "UTC " + clock.format("Z");
 
 		captionWrapper.appendChild(gapWrapper);
